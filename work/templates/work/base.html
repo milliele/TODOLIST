@@ -42,15 +42,10 @@
                   <span class="icon icon-search search-icon"></span>
                   <input type="text" class="form-control search-query">
                 </div>
-              </form>
+                </form>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href=""><span class="icon icon-plus click"></span></a></li>
-                <li><div class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-cog"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Log out</a></li>
-                    </ul>
-                </div></li>
+                  {% block navbar-nav %}
+                  {% endblock navbar-nav %}
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -58,6 +53,6 @@
       <!--header-->
     </div>
     {% block container%}
-    {% endblock %}
+    {% endblock container%}
     </body>
 </html>
