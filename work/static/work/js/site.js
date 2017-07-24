@@ -7,6 +7,7 @@ $(document).ready(function(){
                         format: 'yyyy-mm-dd hh:ii',
                         bootcssVer: 3
                     });
+                  $("[data-toggle='tooltip']").tooltip();
                 });
 
 $(function (){
@@ -27,4 +28,21 @@ $(function (){
         }
     });
 });
+
+function LinkAddTODO()
+{
+    $('#addnewwork').prev().find('ul').append($('#format_new').clone().html());
+    //alert($('#addnewwork').prev().find('ul').html());
+    $('#addnewwork').hide();
+    $('.td_submit button.cancel').click(function () {
+            $(this).parents('li.manager').remove();
+            $('#addnewwork').show();
+        });
+    $('.priority-choice td').click(function () {
+        alert("in");
+        $(this).siblings().removeAttr("selected");
+        $(this).attr("selected", "");
+        $(this).parents('.dropdown').attr("value", $(this).attr("value"));
+    });
+}
 

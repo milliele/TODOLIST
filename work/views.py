@@ -17,4 +17,4 @@ class ToDoWorkList(APIView):
     def get(self, request, format=None):
         tasks = Work.objects.all()
         serializer = WorkSerializer(tasks, many=True)
-        return Response({'mydata':123}, template_name='work/todoworklist.html')
+        return Response({'number':13}, template_name='work/todoworklist.html')

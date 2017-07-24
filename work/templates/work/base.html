@@ -1,0 +1,63 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>TODO List</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'work/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'work/css/bootflat.min.css' %}">
+        <link rel="stylesheet" href="{% static 'work/css/site.css' %}">
+        <link rel="stylesheet" href="{% static 'work/css/square/blue.css' %}">
+        <link rel="stylesheet" href="{% static 'work/css/icomoon.css' %}">
+        <link rel="stylesheet" href="{% static 'work/css/bootstrap-datetimepicker.min.css' %}">
+        <!-- JS files.-->
+        <script src="{% static 'work/js/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static 'work/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'work/js/bootstrap-datetimepicker.min.js' %}"></script>
+        <script src="{% static 'work/js/icheck.min.js' %}"></script>
+        <script src="{% static 'work/js/jquery.fs.selecter.min.js' %}"></script>
+        <script src="{% static 'work/js/jquery.fs.stepper.min.js' %}"></script>
+        <script src="{% static 'work/js/site.js' %}"></script>
+    </head>
+    <body style="background-color: #F5F7FA;">
+    <div id="docs-header">
+      <!--nav-->
+        <nav class="navbar navbar-custom head-navbar" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">TodoList</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-right" role="search">
+                <div class="form-search search-only" style="margin-left: 5px">
+                  <span class="icon icon-search search-icon"></span>
+                  <input type="text" class="form-control search-query">
+                </div>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href=""><span class="icon icon-plus click"></span></a></li>
+                <li><div class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-cog"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Log out</a></li>
+                    </ul>
+                </div></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+      <!--header-->
+    </div>
+    {% block container%}
+    {% endblock %}
+    </body>
+</html>

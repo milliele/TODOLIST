@@ -867,8 +867,13 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
  * priority-choice
  * ---------------------------------- */
 .dropdown .priority-choice td {
-    padding-top: 10px;
-    padding-bottom: 0px;
+    margin-top: 10px;
+    padding: 3px;
+    text-decoration: none;
+    text-align: center;
+}
+.dropdown .priority-choice td[selected] {
+    border: 2px solid white;
 }
 .dropdown .priority-choice.disabled a
 {
@@ -884,7 +889,36 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .dropdown .priority-choice td a{
     vertical-align: middle;
     padding: 0px;
-    margin-right: 20px;
+    margin: 0px 10px;
+}
+.dropdown .priority-choice td a:hover,
+.dropdown .priority-choice td a:focus
+{
+    background-color: transparent;
+}
+.dropdown.priority-choice [value=low] a .icon{
+    color: #37BC9B;
+}
+.dropdown [value=low] a:hover>.icon,
+.dropdown [value=low] a:focus>.icon
+{
+    color: #48CFAD;
+}
+.dropdown [value=medium] a>.icon{
+    color: #F6BB42;
+}
+.dropdown [value=medium] a:hover>.icon,
+.dropdown [value=medium] a:focus>.icon
+{
+    color: #FFCE54;
+}
+.dropdown [value=high] a>.icon {
+    color: #E9573F;
+}
+.dropdown [value=high] a:hover>.icon,
+.dropdown [value=high] a:focus>.icon
+{
+    color: #FC6E51;
 }
 /* ----------------------------------
  * index-list
@@ -963,4 +997,42 @@ td.operations {
 
 .datetimepicker {
     background-color: white;
+}
+
+.td_extra {
+    width: 30px !important;
+}
+
+.form_icon_holder {
+    padding: 10px 0 5px 0;
+    width: 100%;
+    display: block;
+}
+.text_box_holder {
+    width: 100%;
+}
+
+.input-group .due-time-holder {
+    width: 30%;
+}
+
+.input-group .due-time-holder input{
+    background-color: white;
+}
+
+.manager {
+    padding: 8px 0 !important;
+    background: none !important;
+    margin-bottom: 6px;
+}
+
+.manager .td_submit {
+    width: 100% !important;
+    white-space: nowrap;
+    padding-right: 25px !important;
+}
+
+.manager .td_submit .btn {
+    margin-top:5px;
+    margin-right:5px;
 }

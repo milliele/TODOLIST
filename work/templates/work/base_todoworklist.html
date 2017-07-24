@@ -1,0 +1,61 @@
+{% extends 'work/base.html' %}
+{% block container %}
+    <div class="container listindex">
+        <div class="row">
+          <div class="col-md-3 left-bar">
+            <ul id="Regular" class="nav nav-pills nav-stacked">
+              <li class="active"><a href="#">All TODOs<span class="badge pull-right">{{ number }}</span></a></li>
+              <li><a href="#">Today</a></li>
+            </ul>
+          </div>
+          <div class="col-md-9 mainbody">
+              <h4 class="index-name">
+                  <span>TodoList</span>
+                  <div class="dropdown pull-right">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-wrench"></span></a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Sort by Priority</a></li>
+                          <li><a href="#">Sort by Expire Time</a></li>
+                      </ul>
+                  </div>
+              </h4>
+              <div class="indexlist">
+                  <div class="indexbox">
+                      <h5 class="boxtitle"><span class="word-danger">Expired</span></h5>
+                      <ul class="worklist items">
+                          <li class="worklist-item">
+                            <table cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="checker">
+                                            <div class="icheckbox"><input type="checkbox" name="quux[1]"></div>
+                                        </td>
+                                        <td class="worklist-item-content content">
+                                            <div class="pull-right expire-time"><span>17 July</span></div>
+                                            <span class="text">no guoqi</span>
+                                        </td>
+                                        <td class="operations dropdown priority-choice">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-equalizer click"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">Edit</a></li>
+                                                <li class="divider"></li>
+                                                {% include 'work/__priority-choice.html' %}
+                                                <li class="divider"></li>
+                                                <li><a href="#">Delete</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                      </ul>
+                  </div>
+                  <div id="addnewwork">
+                          <a href="javascript:LinkAddTODO();"><span><span class="icon icon-plus"></span>Add new tasks</span></a>
+                  </div>
+              </div>
+          </div>
+       </div>
+    </div>
+    {% include 'work/__new-task.html' %}
+{% endblock %}

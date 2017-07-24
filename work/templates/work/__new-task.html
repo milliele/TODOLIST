@@ -1,0 +1,35 @@
+<div class="hidden" id="format_new">
+    <li class="manager">
+        <form>
+          <table width="100%">
+              <tbody>
+              <tr>
+                  <td class="text_box_holder">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="What to do?....">
+                        <span class="input-group-btn due-time-holder">
+                            <input type="text" class="form-control" placeholder="Choose expire time" id="datetimepicker" readonly style="cursor: pointer">
+                        </span>
+                      </div>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+          <table class="td_submit_area"><tbody><tr>
+              <td align="left" class="td_submit">
+                  <button type="button" class="btn btn-primary add">Add TODO</button>
+                  <button type="button" class="btn btn-default cancel">Cancel</button>
+              <td align="right" class="td_extra">
+                  <div class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          <span class="icon icon-star-full" data-toggle="tooltip" data-placement="bottom" title data-original-title="Set up priority"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          {% include 'work/__priority-choice.html' %}
+                      </ul>
+                  </div>
+              </td>
+          </tr></tbody></table>
+        </form>
+    </li>
+</div>
