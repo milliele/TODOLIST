@@ -35,7 +35,13 @@ function AddWork(text, expiretime, priority) {
         type: "POST",
         data: post_data,
         success: function (data) {
-            $('#unfinish .worklist').append(data);
+            $('#hidden').html(data);
+            $('#hidden>li.worklist-item').hide();
+            //alert($('#hidden').html());
+            $('#hidden>li.worklist-item').appendTo($('#unfinish .worklist'));
+            //alert($('#unfinish .worklist').html());
+            $('#unfinish .worklist .worklist-item').last().fadeIn();
+            $('#hidden').html("");
             register_worklist_item_operations($('#unfinish .worklist .worklist-item').last());
             va = parseInt($("#unfinish-count").html());
             $("#unfinish-count").html(va+1);
@@ -57,6 +63,7 @@ function DeleteWork(id) {
         success: function (data) {
             if(data=="")
             {
+                $('#'+post_data["id"]+'-unfinished').fadeOut("slow");
                 $('#'+post_data["id"]+'-unfinished').remove();
                 va = parseInt($("#unfinish-count").html());
                 $("#unfinish-count").html(va-1);
@@ -79,6 +86,7 @@ function MarkWork(id) {
         success: function (data) {
             if(data=="")
             {
+                $('#'+post_data["id"]+'-unfinished').fadeOut("slow");
                 $('#'+post_data["id"]+'-unfinished').remove();
                 va = parseInt($("#unfinish-count").html());
                 $("#unfinish-count").html(va-1);
@@ -100,6 +108,7 @@ function WorkSortBy(k) {
         data: post_data,
         success: function (data) {
             $('#unfinish .worklist').html(data);
+            register_worklist_operations();
             },
         async: false
     });
@@ -115,6 +124,9 @@ function WorkSortBy(k) {
                   </div>
 <div id="addnewwork">
       <a href="javascript:LinkAddTODO();"><span><span class="icon icon-plus"></span>Add new tasks</span></a>
+</div>
+<div class="hidden" id="hidden">
+
 </div>
 {% endblock unfinishmodule %}
 

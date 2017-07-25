@@ -10,9 +10,9 @@
                     <div class="pull-right expire-time"><span>{{ item.expiretime}}</span></div>
                     <div class="text">{{ item.text|escape }}</div>
                 </td>
-                <td class="right-item">
+                <td class="right-item worklist-item-content">
                       <div class="{{ item.priority }} worklist-item-priority" value="{{ item.priority }}">
-                          <span class="icon icon-star-full"></span>
+                          <span class="icon icon-star-full"  data-toggle="tooltip" data-placement="bottom" title data-original-title="Priority {{ item.priority }}"></span>
                       </div>
                 </td>
                 <td class="right-item">

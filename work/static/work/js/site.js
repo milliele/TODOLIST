@@ -58,87 +58,8 @@ function register_priority_choice()
     });
 }
 
-function register_worklist_item_operations(item)
+function register_worklist_operations()
 {
-    register_iCheck();
-    register_priority_choice();
-    item.find('.worklist-item-content').click(function() {
-        //alert('in');
-        f_li = $(this).parents('.worklist-item');
-        f_li.hide();
-        editli = $('#format_new').clone();
-        //ID
-        id = f_li.attr("id")
-        editli.find('.manager').attr("agent-id",id);
-        //TEXT
-        editli.find('.text_box_holder input.todotext-holder').attr("value", f_li.find('.worklist-item-content .text').html());
-        //DUE-TIME
-        //editli.find('.text_box_holder .due-time-holder>input').removeAttr("readonly");
-        mydatetimepickerid = "edit_date_"+parseInt(id);
-        editli.find('.text_box_holder .due-time-holder>input').attr("id", mydatetimepickerid);
-        editli.find('.text_box_holder .due-time-holder>input').attr("value", f_li.find('.worklist-item-content .expire-time>span').html());
-        //alert(f_li.find('.worklist-item-content .expire-time>span').html());
-        //PRIORITY
-        editli.find('.priority-choice').parents('.dropdown').attr("value", f_li.find('.worklist-item-priority').attr("value"));
-        //PROPERTIES
-        editli.find('.td_submit').addClass("td_editing");
-        editli.find('.td_editing').removeClass("td_submit");
-        //BUTTON-ADD
-        editli.find('button.add').html("Modify");
-        //APPEND
-        f_li.after(editli.html());
-        //CLICK_REGISTER
-        //BUTTON-CANCEL
-        $('[agent-id='+id+'] button.cancel').click(function () {
-            $(this).parents('li.manager').remove();
-            f_li.show();
-        });
-        //BUTTON-ADD
-        $('[agent-id='+id+'] button.add').click(function () {
-            //alert('in');
-            sumit = $(this).parents('.td_submit_area');
-            id = parseInt(sumit.parents('.manager').attr("agent-id"));
-            //alert(id);
-            text = sumit.prev().find('input.todotext-holder').val();
-            expiretime = $('#'+mydatetimepickerid).val();
-            priority = sumit.find('.dropdown').attr("value");
-            //alert(priority);
-            $(this).parents('li.manager').remove();
-            EditWork(id, text, expiretime, priority);
-        });
-        //REGISTERS
-        register_priority_choice();
-        register_tooltip();
-        register_datetimepicker('#'+mydatetimepickerid);
-        $('#'+mydatetimepickerid).datetimepicker('update');
-    });
-    item.find('.dropdown-edit').click(function (){
-        $(this).parents('div.dropdown').parent().siblings('.worklist-item-content').click();
-    });
-    item.find('.dropdown-delete').click(function (){
-        id = parseInt($(this).parents('.worklist-item').attr("id"));
-        DeleteWork(id);
-    });
-    item.find('.checker input[type=checkbox]').on('ifChecked', function(event){
-          alert("mark");
-          id = parseInt($(this).parents('.worklist-item').attr("id"));
-          MarkWork(id);
-        });
-}
-
-function register_add_block_operations(datetimepickerid)
-{
-    register_priority_choice();
-    register_tooltip();
-    register_datetimepicker(datetimepickerid);
-}
-
-/*********************************************
- * PAGE READY
- */
-$(document).ready(function () {
-    // Registers
-    register_popovers();
     register_tooltip();
     register_iCheck();
     register_priority_choice();
@@ -171,7 +92,7 @@ $(document).ready(function () {
         //BUTTON-CANCEL
         $('[agent-id='+id+'] button.cancel').click(function () {
             $(this).parents('li.manager').remove();
-            f_li.show();
+            f_li.fadeIn();
         });
         //BUTTON-ADD
         $('[agent-id='+id+'] button.add').click(function () {
@@ -193,7 +114,7 @@ $(document).ready(function () {
         $('#'+mydatetimepickerid).datetimepicker('update');
     });
     $('.dropdown-edit').click(function (){
-        $(this).parents('div.dropdown').parent().siblings('.worklist-item-content').click();
+        $(this).parents('div.dropdown').parent().siblings('.worklist-item-content').first().click();
     });
     $('.dropdown-delete').click(function (){
         //alert("in");
@@ -204,6 +125,91 @@ $(document).ready(function () {
           id = parseInt($(this).parents('.worklist-item').attr("id"));
           MarkWork(id);
         });
+}
+
+function register_worklist_item_operations(item)
+{
+    register_iCheck();
+    register_tooltip();
+    register_priority_choice();
+    item.find('.worklist-item-content').click(function() {
+        //alert('in');
+        f_li = $(this).parents('.worklist-item');
+        f_li.hide();
+        editli = $('#format_new').clone();
+        //ID
+        id = f_li.attr("id")
+        editli.find('.manager').attr("agent-id",id);
+        //TEXT
+        editli.find('.text_box_holder input.todotext-holder').attr("value", f_li.find('.worklist-item-content .text').html());
+        //DUE-TIME
+        //editli.find('.text_box_holder .due-time-holder>input').removeAttr("readonly");
+        mydatetimepickerid = "edit_date_"+parseInt(id);
+        editli.find('.text_box_holder .due-time-holder>input').attr("id", mydatetimepickerid);
+        editli.find('.text_box_holder .due-time-holder>input').attr("value", f_li.find('.worklist-item-content .expire-time>span').html());
+        //alert(f_li.find('.worklist-item-content .expire-time>span').html());
+        //PRIORITY
+        editli.find('.priority-choice').parents('.dropdown').attr("value", f_li.find('.worklist-item-priority').attr("value"));
+        //PROPERTIES
+        editli.find('.td_submit').addClass("td_editing");
+        editli.find('.td_editing').removeClass("td_submit");
+        //BUTTON-ADD
+        editli.find('button.add').html("Modify");
+        //APPEND
+        f_li.after(editli.html());
+        //CLICK_REGISTER
+        //BUTTON-CANCEL
+        $('[agent-id='+id+'] button.cancel').click(function () {
+            $(this).parents('li.manager').remove();
+            f_li.fadeIn();
+        });
+        //BUTTON-ADD
+        $('[agent-id='+id+'] button.add').click(function () {
+            //alert('in');
+            sumit = $(this).parents('.td_submit_area');
+            id = parseInt(sumit.parents('.manager').attr("agent-id"));
+            //alert(id);
+            text = sumit.prev().find('input.todotext-holder').val();
+            expiretime = $('#'+mydatetimepickerid).val();
+            priority = sumit.find('.dropdown').attr("value");
+            //alert(priority);
+            $(this).parents('li.manager').remove();
+            EditWork(id, text, expiretime, priority);
+        });
+        //REGISTERS
+        register_priority_choice();
+        register_tooltip();
+        register_datetimepicker('#'+mydatetimepickerid);
+        $('#'+mydatetimepickerid).datetimepicker('update');
+    });
+    item.find('.dropdown-edit').click(function (){
+        $(this).parents('div.dropdown').parent().siblings('.worklist-item-content').first().click();
+    });
+    item.find('.dropdown-delete').click(function (){
+        id = parseInt($(this).parents('.worklist-item').attr("id"));
+        DeleteWork(id);
+    });
+    item.find('.checker input[type=checkbox]').on('ifChecked', function(event){
+          //alert("mark");
+          id = parseInt($(this).parents('.worklist-item').attr("id"));
+          MarkWork(id);
+        });
+}
+
+function register_add_block_operations(datetimepickerid)
+{
+    register_priority_choice();
+    register_tooltip();
+    register_datetimepicker(datetimepickerid);
+}
+
+/*********************************************
+ * PAGE READY
+ */
+$(document).ready(function () {
+    // Registers
+    register_popovers();
+    register_worklist_operations();
 });
 
 /**********************************************
@@ -282,7 +288,7 @@ function ModalAddTODO()
         //alert(id);
         text = sumit.prev().find('input.todotext-holder').val();
         is_able = Empty_validation('Content of TODO', text, false);
-        expiretime = $('#add_new_date').val();
+        expiretime = $('#modal_add_new_date').val();
         //alert(expiretime.length);
         priority = sumit.find('.dropdown').attr("value");
         //alert(priority);
@@ -294,7 +300,7 @@ function ModalAddTODO()
             $('#AddnewModal').modal('hide');
         }
     });
-    register_add_block_operations('#add_new_date');
+    register_add_block_operations('#modal_add_new_date');
 }
 
 /***********************************************
