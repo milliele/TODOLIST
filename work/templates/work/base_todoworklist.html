@@ -9,13 +9,29 @@
     </div></li>
 {% endblock navbar-nav %}
 
+{% block inpagecss %}
+{% for pri in prilist %}
+
+.{{ pri.name }}[value={{ pri.name }}] .icon,
+div.dropdown[value={{ pri.name }}] a.dropdown-toggle>.icon
+{
+    color: {{ pri.color }};
+}
+.{{ pri.name }}[value={{ pri.name }}]>a:hover>.icon, .{{ pri.name }}[value={{ pri.name }}]>a:focus>.icon,
+div.dropdown[value={{ pri.name }}] a.dropdown-toggle:hover>.icon, div.dropdown[value={{ pri.name }}] a.dropdown-toggle:focus>.icon
+{
+    color: {{ pri.hovercolor }};
+}
+{% endfor %}
+{% endblock inpagecss %}
+
 {% block container %}
     <div class="container listindex">
         <div class="row">
           <div class="col-md-3 left-bar">
             <ul id="Regular" class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#">All TODOs<span class="badge pull-right">{{ number }}</span></a></li>
-              <li><a href="#">Today</a></li>
+                {% block leftbar-lis %}
+                {% endblock leftbar-lis %}
             </ul>
           </div>
           <div class="col-md-9 mainbody">
@@ -24,79 +40,16 @@
                   <div class="dropdown pull-right">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-wrench"></span></a>
                       <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Sort by Priority</a></li>
-                          <li><a href="#">Sort by Expire Time</a></li>
+                          <li><a href="javascript:WorkSortBy('-prior');">Sort by Priority</a></li>
+                          <li><a href="javascript:WorkSortBy('expiretime');">Sort by Expire Time</a></li>
                       </ul>
                   </div>
               </h4>
               <div class="indexlist">
-                  {% if unfinishedlist|length > 0 %}
-                  <div class="indexbox">
-                      <h5 class="boxtitle">TODOs</h5>
-                      <ul class="worklist items">
-                          {% for item in unfinishedlist %}
-                          <li class="worklist-item" id="unfinished-{{ item.id }}">
-                            <table cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td class="checker">
-                                            <div class="icheckbox"><input type="checkbox"></div>
-                                        </td>
-                                        <td class="worklist-item-content content">
-                                            <div class="pull-right expire-time"><span>{{ item.expiretime|date:"Y-m-d H:i"}}</span></div>
-                                            <span class="text">{% item.content|escape %}</span>
-                                        </td>
-                                        <td class="operations dropdown" value="{% item.priority %}">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-equalizer click"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li class="dropdown-edit"><a href="#">Edit</a></li>
-                                                <li class="divider"></li>
-                                                {% include 'work/__priority-choice.html' %}
-                                                <li class="divider"></li>
-                                                <li><a href="#">Delete</a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </li>
-                          {% endfor %}
-                      </ul>
-                  </div>
-                  {% endif %}
-                  <div id="addnewwork">
-                          <a href="javascript:LinkAddTODO();"><span><span class="icon icon-plus"></span>Add new tasks</span></a>
-                  </div>
-                  {% if finishedlist|length > 0 %}
-                  <div class="indexbox finished">
-                      <h5 class="boxtitle">Expired</h5>
-                      <ul class="worklist items">
-                          {% for item in finishedlist %}
-                          <li class="worklist-item" id="unfinished-{{ item.id }}">
-                            <table cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td class="checker">
-                                            <div class="icheckbox"><input type="checkbox" disabled checked></div>
-                                        </td>
-                                        <td class="worklist-item-content content">
-                                            <div class="pull-right expire-time"><span>{{ item.expiretime|date:"Y-m-d H:i"}}</span></div>
-                                            <span class="text">{% item.content|escape %}</span>
-                                        </td>
-                                        <td class="operations dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-equalizer click"></span></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Delete</a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                          </li>
-                          {% endfor %}
-                      </ul>
-                  </div>
-                  {% endif %}
+                  {% block unfinishmodule %}
+                  {% endblock unfinishmodule %}
+                  {% block finishedmodule %}
+                  {% endblock finishedmodule %}
               </div>
           </div>
        </div>

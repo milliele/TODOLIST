@@ -1,12 +1,14 @@
+{% if prilist|length > 0 %}
 <li class="priority-choice disabled"><a href="#" disabled>
     <table>
         <tbody>
         <tr>Priority</tr>
         <tr>
-            <td value="low"><a href="#" class=low><span class="icon icon-star-full"></span></a></td>
-            <td value="medium"><a href="#" class="medium"><span class="icon icon-star-full"></span></a></td>
-            <td value="high"><a href="#" class="high"><span class="icon icon-star-full"></span></a></td>
+            {% for pri in prilist %}
+            <td value="{{ pri.name }}" class="{{ pri.name }}"><a href="javascript:return false;"><span class="icon icon-star-full" data-toggle="tooltip" data-placement="bottom" title data-original-title="Priority {{ pri.name }}"></span></a></td>
+            {% endfor %}
         </tr>
         </tbody>
     </table>
 </a></li>
+{% endif %}

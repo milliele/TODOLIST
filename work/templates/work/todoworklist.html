@@ -1,1 +1,124 @@
 {% extends 'work/base_todoworklist.html' %}
+
+{% block dynamicjs %}
+function EditWork(id, text, expiretime, priority) {
+    //alert('inedit');
+    var post_data = {
+        "id":id,
+        "text": text,
+        "expiretime": expiretime,
+        "priority": priority,
+        "operation": "edit"
+    };
+    data = $.ajax({
+        url: "{% url 'listmyworks' %}",
+        type: "POST",
+        data: post_data,
+        success: function (data) {
+            $('#'+post_data["id"]+'-unfinished').replaceWith(data);
+            register_worklist_item_operations($('#'+post_data["id"]+'-unfinished'));
+        },
+        async: false
+    });
+}
+function AddWork(text, expiretime, priority) {
+    //alert('inedit');
+    var post_data = {
+        "text": text,
+        "expiretime": expiretime,
+        "priority": priority,
+        "operation": "add"
+    };
+    //alert(post_data);
+    data = $.ajax({
+        url: "{% url 'listmyworks' %}",
+        type: "POST",
+        data: post_data,
+        success: function (data) {
+            $('#unfinish .worklist').append(data);
+            register_worklist_item_operations($('#unfinish .worklist .worklist-item').last());
+            va = parseInt($("#unfinish-count").html());
+            $("#unfinish-count").html(va+1);
+        },
+        async: false
+    });
+}
+
+function DeleteWork(id) {
+    //alert('inedit');
+    var post_data = {
+        "id":id,
+        "operation": "delete"
+    };
+    data = $.ajax({
+        url: "{% url 'listmyworks' %}",
+        type: "POST",
+        data: post_data,
+        success: function (data) {
+            if(data=="")
+            {
+                $('#'+post_data["id"]+'-unfinished').remove();
+                va = parseInt($("#unfinish-count").html());
+                $("#unfinish-count").html(va-1);
+            }
+        },
+        async: false
+    });
+}
+
+function MarkWork(id) {
+    //alert(id);
+    var post_data = {
+        "id":id,
+        "operation": "mark"
+    };
+    data = $.ajax({
+        url: "{% url 'listmyworks' %}",
+        type: "POST",
+        data: post_data,
+        success: function (data) {
+            if(data=="")
+            {
+                $('#'+post_data["id"]+'-unfinished').remove();
+                va = parseInt($("#unfinish-count").html());
+                $("#unfinish-count").html(va-1);
+            }
+        },
+        async: false
+    });
+}
+
+function WorkSortBy(k) {
+    //alert('inedit');
+    var post_data = {
+        "order_by":k,
+        "operation":"order"
+    };
+    data = $.ajax({
+        url: "{% url 'listmyworks' %}",
+        type: "POST",
+        data: post_data,
+        success: function (data) {
+            $('#unfinish .worklist').html(data);
+            },
+        async: false
+    });
+}
+{% endblock dynamicjs %}
+
+{% block unfinishmodule %}
+<div class="indexbox" id="unfinish">
+                      <h5 class="boxtitle">TODOs</h5>
+                      <ul class="worklist items">
+                          {% include 'work/__unfinishlist.html' %}
+                      </ul>
+                  </div>
+<div id="addnewwork">
+      <a href="javascript:LinkAddTODO();"><span><span class="icon icon-plus"></span>Add new tasks</span></a>
+</div>
+{% endblock unfinishmodule %}
+
+{% block leftbar-lis %}
+    <li class="active"><a href="{% url 'listmyworks' %}">All TODOs<span class="badge pull-right" id="unfinish-count">{{ number }}</span></a></li>
+    <li><a href="{% url 'listmyfinishedworks' %}">Finished TODOs</a></li>
+{% endblock %}

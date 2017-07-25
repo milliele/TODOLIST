@@ -898,36 +898,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 {
     background-color: transparent;
 }
-.dropdown [value=low] a>.icon,
-div.dropdown[value=low] a.dropdown-toggle>.icon
-{
-    color: #37BC9B;
-}
-.dropdown [value=low] a:hover>.icon, .dropdown [value=low] a:focus>.icon,
-div.dropdown[value=low] a.dropdown-toggle:hover>.icon, div.dropdown[value=low] a.dropdown-toggle:focus>.icon
-{
-    color: #48CFAD;
-}
-.dropdown [value=medium] a>.icon,
-div.dropdown[value=medium] a.dropdown-toggle>.icon
-{
-    color: #F6BB42;
-}
-.dropdown [value=medium] a:hover>.icon, .dropdown [value=medium] a:focus>.icon,
-div.dropdown[value=medium] a.dropdown-toggle:hover>.icon, div.dropdown[value=medium] a.dropdown-toggle:focus>.icon
-{
-    color: #FFCE54;
-}
-.dropdown [value=high] a>.icon,
-div.dropdown[value=high] a.dropdown-toggle>.icon
-{
-    color: #E9573F;
-}
-.dropdown [value=high] a:hover>.icon, .dropdown [value=high] a:focus>.icon,
-div.dropdown[value=high] a.dropdown-toggle:hover>.icon, div.dropdown[value=high] a.dropdown-toggle:focus>.icon
-{
-    color: #FC6E51;
-}
 /* ----------------------------------
  * index-list
  * ---------------------------------- */
@@ -957,6 +927,10 @@ div.dropdown[value=high] a.dropdown-toggle:hover>.icon, div.dropdown[value=high]
     font-size: 14px;
     border-bottom: 1px solid #f0f0f0;
 }
+.worklist-item .worklist-item-content .text {
+    max-width: 420px;
+    word-wrap: break-word;
+}
 .worklist-item .content {
     max-width: 500px;
     overflow: hidden;
@@ -965,7 +939,7 @@ div.dropdown[value=high] a.dropdown-toggle:hover>.icon, div.dropdown[value=high]
     padding-top: 13px;
     padding-bottom: 13px;
 }
-.worklist-item td.operations {
+.worklist-item td.right-item {
     padding-top: 15px !important;
     padding-bottom: 8px !important;
     border-bottom: 1px solid transparent;
@@ -984,17 +958,14 @@ div.dropdown[value=high] a.dropdown-toggle:hover>.icon, div.dropdown[value=high]
     padding-right: 10px;
 }
 /* ----------------------------------
- * operations
+ * right-item
  * ---------------------------------- */
-.operations {
+.right-item {
     padding-left: 3px;
     vertical-align: middle;
     text-align: right;
 }
-td.operations {
-    cursor: pointer;
-}
-.index-name .operations {
+.index-name .right-item {
     float: right;
     margin-top: -3px;
 }

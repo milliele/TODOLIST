@@ -1,0 +1,66 @@
+{% extends 'work/base_todoworklist.html' %}
+
+{% block dynamicjs %}
+function DeleteWork(id) {
+    //alert('inedit');
+    var post_data = {
+        "id":id,
+        "operation": "delete"
+    };
+    data = $.ajax({
+        url: "{% url 'listmyworks' %}",
+        type: "POST",
+        data: post_data,
+        success: function (data) {
+            if(data=="")
+            {
+                $('#'+post_data["id"]+'-finished').remove();
+            }
+        },
+        async: false
+    });
+}
+{% endblock dynamicjs %}
+
+{% block leftbar-lis %}
+    <li><a href="{% url 'listmyworks' %}">All TODOs<span class="badge pull-right">{{ number }}</span></a></li>
+    <li class="active"><a href="{% url 'listmyfinishedworks' %}">Finished TODOs</a></li>
+{% endblock %}
+
+{% block finishedmodule %}
+    <div class="indexbox" id="finished">
+{#      <h5 class="boxtitle">Expired</h5>#}
+      <ul class="worklist items">
+          {% for item in finishedlist %}
+          <li class="worklist-item" id="{{ item.id }}-finished">
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="checker">
+                            <div class="icheckbox"><input type="checkbox" disabled checked></div>
+                        </td>
+                        <td class="worklist-item-content content">
+                            <div class="pull-right expire-time"><span>{{ item.expiretime|date:"Y-m-d H:i"}}</span></div>
+                            <div class="text">{{ item.text|escape }}</div>
+                        </td>
+                        <td class="right-item">
+                              <div>
+                                  <span class="icon icon-star-full"></span>
+                              </div>
+                        </td>
+                        <td class="right-item">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-equalizer click"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-delete"><a href="#">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </li>
+          {% endfor %}
+      </ul>
+  </div>
+{% endblock finishedmodule %}

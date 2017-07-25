@@ -1,0 +1,32 @@
+{% for item in unfinishlist %}
+<li class="worklist-item" id="{{ item.id }}-unfinished">
+    <table cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <td class="checker">
+                    <div class="icheckbox"><input type="checkbox" unchecked></div>
+                </td>
+                <td class="worklist-item-content content">
+                    <div class="pull-right expire-time"><span>{{ item.expiretime}}</span></div>
+                    <div class="text">{{ item.text|escape }}</div>
+                </td>
+                <td class="right-item">
+                      <div class="{{ item.priority }} worklist-item-priority" value="{{ item.priority }}">
+                          <span class="icon icon-star-full"></span>
+                      </div>
+                </td>
+                <td class="right-item">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon icon-equalizer click"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-edit"><a href="#">Edit</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-delete"><a href="#">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</li>
+{% endfor %}

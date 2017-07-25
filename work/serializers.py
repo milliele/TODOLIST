@@ -1,14 +1,11 @@
 from work.models import Work
 from rest_framework import serializers
-from Validators import validate_priority_str
 
 class WorkSerializer(serializers.ModelSerializer):
-    priority = serializers.CharField(max_length=10, validators=validate_priority_str)
+
+    expiretime = serializers.DateTimeField(format="%Y-%m-%d %H:%M", allow_null=True)
 
     class Meta:
         model = Work
-        fields = ('text', 'expire', 'is_finished', 'prior','id')
-
-    def Create(self, validated_data):
-        work = Work(**validated_data)
-
+        fields = ('text', 'expiretime', 'prior', 'id','is_finished')
+        read_only_fields = ('id',)

@@ -1,7 +1,7 @@
 <div class="hidden" id="format_new">
     <li class="manager">
         <form>
-          <table width="100%">
+          <table width="100%" class="text-modify-area">
               <tbody>
               <tr>
                   <td class="text_box_holder">
@@ -20,7 +20,7 @@
                   <button type="button" class="btn btn-primary add">Add TODO</button>
                   <button type="button" class="btn btn-default cancel">Cancel</button>
               <td align="right" class="td_extra">
-                  <div class="dropdown" value="low">
+                  <div class="dropdown" value="{% for pri in prilist %}{% if forloop.first %}{{ pri.name }}{% endif %}{% endfor %}">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                           <span class="icon icon-star-full" data-toggle="tooltip" data-placement="bottom" title data-original-title="Set up priority"></span>
                       </a>
