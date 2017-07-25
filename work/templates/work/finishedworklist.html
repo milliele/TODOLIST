@@ -29,7 +29,7 @@ function DeleteWork(id) {
 
 {% block finishedmodule %}
     <div class="indexbox" id="finished">
-{#      <h5 class="boxtitle">Expired</h5>#}
+      <h5 class="boxtitle">Finished</h5>
       <ul class="worklist items">
           {% for item in finishedlist %}
           <li class="worklist-item" id="{{ item.id }}-finished">
