@@ -10,6 +10,8 @@ from rest_framework import status
 from work.models import Work, PRIORITY_ATTR, ToPriorityValue, ObjectToPriorityName
 from work.serializers import WorkSerializer
 
+import sys
+
 class ToDoWorkList(APIView):
     renderer_classes = (TemplateHTMLRenderer, StaticHTMLRenderer,)
 
@@ -36,10 +38,14 @@ class ToDoWorkList(APIView):
         unfinish = []
         if workserializer!=None and workserializer.is_valid():
             # print workserializer.validated_data
-            workserializer.save()
-            import copy
-            workdata = copy.deepcopy(workserializer.data)
-            unfinish.append(workdata)
+            try:
+                workserializer.save()
+                import copy
+                workdata = copy.deepcopy(workserializer.data)
+                unfinish.append(workdata)
+            except Exception, e:
+                import traceback
+                print >> sys.stderr, traceback.format_exc(e)
         map(self.foreach_object, unfinish)
         return Response({'prilist': PRIORITY_ATTR,
                          'unfinishlist': unfinish
@@ -61,7 +67,7 @@ class ToDoWorkList(APIView):
                 workserializer = WorkSerializer(data=data)
             except Exception,e:
                 import traceback
-                print traceback.format_exc(e)
+                print >> sys.stderr, traceback.format_exc(e)
             return self.return_entry(workserializer)
         elif data['operation']=='delete':
             work = Work.objects.get(id=data['id']).delete()
@@ -86,7 +92,7 @@ class ToDoWorkList(APIView):
                 return self.return_entry(None)
             except Exception,e:
                 import traceback
-                print traceback.format_exc(e)
+                print >> sys.stderr, traceback.format_exc(e)
                 return Response({'prilist': PRIORITY_ATTR }
                             , template_name='work/__priority-choice.html', )
 

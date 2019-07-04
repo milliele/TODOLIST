@@ -25,7 +25,7 @@ SECRET_KEY = 'tz8x%puqzbs1_uc(*t@$#84het4e#fk)(+g9ed=9@^%umbk5i0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','milliele.ink','101.132.119.117', 'localhost']
 
 
 # Application definition
